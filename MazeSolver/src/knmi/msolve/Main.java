@@ -1,3 +1,4 @@
+package knmi.msolve;
 import java.util.Arrays;
 
 public class Main {

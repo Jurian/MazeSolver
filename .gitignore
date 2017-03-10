@@ -3,3 +3,4 @@ MazeSolver/bin/*
 MazeSolver/.settings/*
 MazeSolver/.project
 MazeSolver/.classpath
+.metadata/

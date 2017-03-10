@@ -3,11 +3,16 @@ package knmi.msolve.model;
 public class Maze {
 
 	
-	private final Boolean[][] data;
+	private final Boolean[][] structure;
 	
 	
-	public Maze(Boolean[][] data) {
-		this.data = data;
+	public Maze(Boolean[][] structure) {
+		this.structure = structure;
+	}
+
+
+	public Boolean[][] getStructure() {
+		return structure;
 	}
 	
 }
