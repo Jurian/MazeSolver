@@ -1,25 +1,38 @@
 package knmi.msolve;
-import java.util.Arrays;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
+
+import knmi.msolve.model.maze.Maze;
+import knmi.msolve.model.parse.IMazeParser;
+import knmi.msolve.model.parse.ImageMazeParser;
+import knmi.msolve.model.parse.StaticMazeParser;
 
 public class Main {
 
 	public static void main(String[] args) {
-		String[] test = new String[]{
-			"1011",
-			"1001",
-			"1101",
-			"1001",
-			"1011"
-		};
-		Boolean[][] data = Arrays.stream(test).map(line -> {
-			return line.chars()
-			.boxed()
-			.map(c -> c == 1 ? true : false)
-            .toArray(Boolean[]::new);
-		}).toArray(Boolean[][]::new);
 		
-		System.out.println(Arrays.deepToString(data));
 		
+		//Create a file chooser
+		final JFileChooser fc = new JFileChooser();
+		IMazeParser parser = null;
+		//In response to a button click:
+		int returnVal = fc.showOpenDialog(null);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			try {
+				parser = new ImageMazeParser(ImageIO.read(fc.getSelectedFile()));
+	        } catch (IOException e) {
+	        	
+	        }
+	    }
+
+		Maze m = parser.parse();
+		
+		//IMazeParser parser = new StaticMazeParser();
+		//Maze m = parser.parse();
+		
+
 	}
 
 }

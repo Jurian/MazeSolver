@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import knmi.msolve.model.Maze;
+import knmi.msolve.model.maze.Maze;
 
 public class FileMazeParser implements IMazeParser {
 

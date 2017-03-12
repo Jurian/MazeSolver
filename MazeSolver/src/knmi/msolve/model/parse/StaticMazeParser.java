@@ -1,6 +1,6 @@
 package knmi.msolve.model.parse;
 
-import knmi.msolve.model.Maze;
+import knmi.msolve.model.maze.Maze;
 
 public class StaticMazeParser implements IMazeParser {
 

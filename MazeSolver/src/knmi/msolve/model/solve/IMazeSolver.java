@@ -1,7 +1,6 @@
 package knmi.msolve.model.solve;
 
-import knmi.msolve.model.Maze;
-import knmi.msolve.model.Path;
+import knmi.msolve.model.maze.Path;
 
 public interface IMazeSolver {
 	Path solve();
