@@ -47,7 +47,7 @@ public class Maze {
 			throw new IllegalArgumentException("Invalid maze: no entrance and/or exit!");
 		}
 		
-		nodeMap.values().forEach(System.out::println);
+		System.out.println(nodeMap.size());
 	}
 	
 	private Node traverseUp(int x, int y, Map<String, Node> nodeMap) {

@@ -5,9 +5,12 @@ import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 
 import knmi.msolve.model.maze.Maze;
+import knmi.msolve.model.maze.Path;
 import knmi.msolve.model.parse.IMazeParser;
 import knmi.msolve.model.parse.ImageMazeParser;
 import knmi.msolve.model.parse.StaticMazeParser;
+import knmi.msolve.model.solve.AStarMazeSolver;
+import knmi.msolve.model.solve.IMazeSolver;
 
 public class Main {
 
@@ -26,12 +29,13 @@ public class Main {
 	        	
 	        }
 	    }
-
-		Maze m = parser.parse();
-		
 		//IMazeParser parser = new StaticMazeParser();
-		//Maze m = parser.parse();
+		Maze maze = parser.parse();
+		IMazeSolver solver = new AStarMazeSolver(maze);
+		Path path = solver.solve();
 		
+		
+		path.forEach(node -> System.out.println("[x="+node.x + ",y=" + node.y+"]"));
 
 	}
 

@@ -69,7 +69,7 @@ public class AStarMazeSolver extends MazeSolver {
 		    openSet.remove(current);
 		    closedSet.add(current);
 		    
-		    for(Node neighbor : new NodeNeighborIterator(current)) {
+		    for(Node neighbor : current) {
 		    	// Ignore the neighbor which is already evaluated
 		    	if(closedSet.contains(neighbor)) continue;
 		    	
@@ -127,32 +127,5 @@ public class AStarMazeSolver extends MazeSolver {
 			return Double.compare(this.fScore, n.fScore);
 		}
 
-	}
-	
-	private class NodeNeighborIterator implements Iterable<Node>{
-		
-		private final Node node;
-		
-		public NodeNeighborIterator(Node node){
-			this.node = node;
-		}
-		
-		@Override
-		public Iterator<Node> iterator() {
-			List<Node> neighbors = new ArrayList<>();
-			if(node.getTop() != null) {
-				neighbors.add(node.getTop());
-			}
-			if(node.getRight() != null) {
-				neighbors.add(node.getRight());
-			}
-			if(node.getBottom() != null) {
-				neighbors.add(node.getBottom());
-			}
-			if(node.getLeft() != null) {
-				neighbors.add(node.getLeft());
-			}
-			return neighbors.iterator();
-		}
 	}
 }
