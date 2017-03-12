@@ -34,8 +34,8 @@ public class Main {
 		IMazeSolver solver = new AStarMazeSolver(maze);
 		Path path = solver.solve();
 		
-		
-		path.forEach(node -> System.out.println("[x="+node.x + ",y=" + node.y+"]"));
+		System.out.println(path.length());
+		//path.forEach(node -> System.out.println("[x="+node.x + ",y=" + node.y+"]"));
 
 	}
 

@@ -20,4 +20,8 @@ public class Path implements Iterable<Node> {
 	public Iterator<Node> iterator() {
 		return nodes.iterator();
 	}
+	
+	public int length() {
+		return nodes.size();
+	}
 }

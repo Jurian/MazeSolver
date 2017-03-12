@@ -1,10 +1,7 @@
 package knmi.msolve.model.solve;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -15,8 +12,6 @@ import knmi.msolve.model.maze.Node;
 import knmi.msolve.model.maze.Path;
 
 public class AStarMazeSolver extends MazeSolver {
-	
-	private static final int COST_INF = Integer.MAX_VALUE;
 	
 	 // The set of nodes already evaluated.
 	private final Set<Node> closedSet  = new HashSet<>();
@@ -33,18 +28,17 @@ public class AStarMazeSolver extends MazeSolver {
     // by passing by that node. That value is partly known, partly heuristic.
 	private final Queue<NodeF> fScore = new PriorityQueue<>();
 	
-	private final NodeF start, end;
+	private final Node start, end;
 	
 	public AStarMazeSolver(Maze maze) {
 		super(maze);
 		
-		start = new NodeF(maze.getEntrance());
-		end = new NodeF(maze.getExit());
-		start.fScore = heuristicCostEstimate(start.node, end.node);
+		start = maze.getEntrance();
+		end = maze.getExit();
 
-		openSet.add(start.node);
-		gScore.put(start.node, 0D);
-		fScore.add(start);
+		openSet.add(start);
+		gScore.put(start, 0D);
+		fScore.add(new NodeF(start, heuristicCostEstimate(start, end)));
 	}
 	
 	private double heuristicCostEstimate(Node start, Node end){
@@ -62,7 +56,7 @@ public class AStarMazeSolver extends MazeSolver {
 				current = fScore.poll().node;
 			}
 			
-	        if(current == end.node){
+	        if(current == end){
 	        	return reconstructPath(current);
 	        }  
 			
@@ -86,12 +80,9 @@ public class AStarMazeSolver extends MazeSolver {
 	            // This path is the best until now. Record it!
 	            cameFrom.put(neighbor, current);
 	            gScore.put(neighbor, tentativeGScore);
-	            fScore.add(new NodeF(neighbor, heuristicCostEstimate(neighbor, end.node)));
-	           
+	            fScore.add(new NodeF(neighbor, heuristicCostEstimate(neighbor, end)));
 		    }
-			
 		}
-		
 		return null;
 	}
 
@@ -113,10 +104,6 @@ public class AStarMazeSolver extends MazeSolver {
 		private final Node node;
 		private double fScore;
 		
-		public NodeF(Node node){
-			this(node, COST_INF);
-		}
-		
 		public NodeF(Node node, double fScore){
 			this.node = node;
 			this.fScore = fScore;
@@ -126,6 +113,5 @@ public class AStarMazeSolver extends MazeSolver {
 		public int compareTo(NodeF n) {
 			return Double.compare(this.fScore, n.fScore);
 		}
-
 	}
 }
