@@ -11,6 +11,7 @@ import knmi.msolve.model.parse.ImageMazeParser;
 import knmi.msolve.model.parse.StaticMazeParser;
 import knmi.msolve.model.solve.AStarMazeSolver;
 import knmi.msolve.model.solve.IMazeSolver;
+import knmi.msolve.view.ViewPort;
 
 public class Main {
 
@@ -36,7 +37,11 @@ public class Main {
 		
 		System.out.println(path.length());
 		//path.forEach(node -> System.out.println("[x="+node.x + ",y=" + node.y+"]"));
-
+		ViewPort vp = new ViewPort();
+		vp.setVisible(true);
+		vp.setMaze(maze);
+		vp.setPath(path);
+		
 	}
 
 }
