@@ -1,6 +1,6 @@
-RemoteSystemsTempFiles/*
-MazeSolver/bin/*
-MazeSolver/.settings/*
-MazeSolver/.project
-MazeSolver/.classpath
+bin/*
+.settings/*
+.project
+.classpath
 .metadata/
+
