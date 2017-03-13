@@ -41,6 +41,7 @@ public class MazeView extends JPanel {
 			
 			Boolean[][] structure = maze.getRawStructure();
 			
+			g.setColor(Color.BLACK);
 			g.clearRect(0, 0, viewWidth, viewHeight);
 			
 			for(int y = 0; y < maze.getHeight(); y++){
