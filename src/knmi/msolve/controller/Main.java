@@ -1,4 +1,5 @@
-package knmi.msolve;
+package knmi.msolve.controller;
+
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
