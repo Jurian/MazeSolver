@@ -20,6 +20,7 @@ public class ViewPort extends JFrame {
 
 	public void setMaze(Maze maze){
 		mazePanel.setMaze(maze);
+		pack();
 		repaint();
 	}
 	

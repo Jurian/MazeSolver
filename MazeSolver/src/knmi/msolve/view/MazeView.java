@@ -1,6 +1,7 @@
 package knmi.msolve.view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
@@ -18,6 +19,8 @@ public class MazeView extends JPanel {
 	
 	public void setMaze(Maze maze) {
 		this.maze = maze;
+		//this.setSize(maze.getWidth() * 10, maze.getHeight() * 10);
+		this.setPreferredSize(new Dimension(maze.getWidth() * 10, maze.getHeight() * 10));
 		if(path != null) path = null;
 	}
 	
@@ -27,7 +30,7 @@ public class MazeView extends JPanel {
 	
 	@Override
 	public void paintComponent(Graphics g) {
-		super.paintComponents(g);
+		super.paintComponent(g);
 		
 		if(maze != null) {
 			int viewHeight = this.getHeight();
