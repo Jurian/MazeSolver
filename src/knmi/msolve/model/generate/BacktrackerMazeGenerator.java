@@ -2,7 +2,11 @@ package knmi.msolve.model.generate;
 
 import knmi.msolve.model.maze.Maze;
 
-public class BacktrackerMazeGenerator implements IMazeGenerator {
+public class BacktrackerMazeGenerator extends MazeGenerator {
+
+	public BacktrackerMazeGenerator(int width, int height) {
+		super(width, height);
+	}
 
 	@Override
 	public Maze generate() {

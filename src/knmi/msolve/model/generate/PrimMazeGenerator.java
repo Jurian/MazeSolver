@@ -2,7 +2,11 @@ package knmi.msolve.model.generate;
 
 import knmi.msolve.model.maze.Maze;
 
-public class PrimMazeGenerator implements IMazeGenerator {
+public class PrimMazeGenerator extends MazeGenerator {
+
+	public PrimMazeGenerator(int width, int height) {
+		super(width, height);
+	}
 
 	@Override
 	public Maze generate() {

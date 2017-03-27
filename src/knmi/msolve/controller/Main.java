@@ -5,11 +5,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 
+import knmi.msolve.model.generate.DepthFirstMazeGenerator;
+import knmi.msolve.model.generate.IMazeGenerator;
 import knmi.msolve.model.maze.Maze;
 import knmi.msolve.model.maze.Path;
 import knmi.msolve.model.parse.IMazeParser;
 import knmi.msolve.model.parse.ImageMazeParser;
-import knmi.msolve.model.parse.StaticMazeParser;
 import knmi.msolve.model.solve.AStarMazeSolver;
 import knmi.msolve.model.solve.IMazeSolver;
 import knmi.msolve.view.ViewPort;
@@ -17,7 +18,10 @@ import knmi.msolve.view.ViewPort;
 public class Main {
 
 	public static void main(String[] args) {
+
 		
+		IMazeGenerator gen = new DepthFirstMazeGenerator(9, 9);
+		gen.generate();
 		
 		//Create a file chooser
 		final JFileChooser fc = new JFileChooser();

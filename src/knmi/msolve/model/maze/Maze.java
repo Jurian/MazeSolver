@@ -28,14 +28,14 @@ public class Maze {
 					
 					n = traverseUp(x, y, nodeMap);
 					if(n != null){ 
-						newNode.setTop(n);
-						n.setBottom(newNode);
+						newNode.addNeighbor(n);
+						n.addNeighbor(newNode);
 					}
 
 					n = traverseLeft(x, y, nodeMap);
 					if(n != null){
-						newNode.setLeft(n);
-						n.setRight(newNode);
+						newNode.addNeighbor(n);
+						n.addNeighbor(newNode);
 					}
 					
 					nodeMap.put(newNode.getKey(), newNode);
@@ -46,8 +46,6 @@ public class Maze {
 		if(entrance == null || exit == null) {
 			throw new IllegalArgumentException("Invalid maze: no entrance and/or exit!");
 		}
-		
-		System.out.println(nodeMap.size());
 	}
 	
 	private Node traverseUp(int x, int y, Map<String, Node> nodeMap) {

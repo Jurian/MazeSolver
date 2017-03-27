@@ -1,18 +1,16 @@
 package knmi.msolve.model.maze;
 
 import java.awt.Point;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
-import java.util.Map;
+import java.util.List;
 
 public class Node extends Point implements Iterable<Node> {
 	
-	enum NodeDirection {
-		TOP, RIGHT, BOTTOM, LEFT;
-	}
 	private static final long serialVersionUID = 1L;
 
-	private Map<NodeDirection, Node> neighbors = new HashMap<>();
+	private List<Node> neighbors = new ArrayList<>();
 
 	private final String key;
 	
@@ -20,40 +18,30 @@ public class Node extends Point implements Iterable<Node> {
 		super(x, y);
 		key = createKey(x, y);
 	}
-
-	public Node getTop() {
-		return neighbors.get(NodeDirection.TOP);
-	}
-
-	public void setTop(Node top) {
-		neighbors.put(NodeDirection.TOP, top);
-	}
-
-	public Node getRight() {
-		return neighbors.get(NodeDirection.RIGHT);
-	}
-
-	public void setRight(Node right) {
-		neighbors.put(NodeDirection.RIGHT, right);
-	}
-
-	public Node getBottom() {
-		return neighbors.get(NodeDirection.BOTTOM);
-	}
-
-	public void setBottom(Node bottom) {
-		neighbors.put(NodeDirection.BOTTOM, bottom);
-	}
-
-	public Node getLeft() {
-		return neighbors.get(NodeDirection.LEFT);
-	}
-
-	public void setLeft(Node left) {
-		neighbors.put(NodeDirection.LEFT, left);
+	
+	public int neighborCount(){
+		return neighbors.size();
 	}
 	
-	public static String createKey(int x, int y){
+	public void clearNeighbors() {
+		neighbors.clear();
+	}
+	
+	public void removeNeighbor(Node n){
+		neighbors.remove(n);
+	}
+	
+	public Node getNeighbor(int i) {
+		if(i >= neighbors.size()) return null;
+		return neighbors.get(i);
+	}
+	
+	public void addNeighbor(Node n) {
+		if(!neighbors.contains(n))
+			neighbors.add(n);
+	}
+	
+	public static String createKey(int x, int y) {
 		return  x + "," + y;
 	}
 	
@@ -61,21 +49,13 @@ public class Node extends Point implements Iterable<Node> {
 		return key;
 	}
 	
-	public String toString(){
-		Node top = neighbors.get(NodeDirection.TOP);
-		Node left = neighbors.get(NodeDirection.LEFT);
-		Node right = neighbors.get(NodeDirection.RIGHT);
-		Node bottom = neighbors.get(NodeDirection.BOTTOM);
-		return "Node[x="+x+",y="+y+"]" +
-				(left != null ? 	" left:   [x=" + left.x + ",y=" + left.y +"]" : "") +
-				(right != null ? 	" right:  [x=" + right.x + ",y=" + right.y+"]" : "") +
-				(top != null ? 		" top:    [x=" + top.x + ",y=" + top.y+"]" : "") +
-				(bottom != null ? 	" bottom: [x="  + bottom.x + ",y=" + bottom.y+"]" : "");
+	public String toString() {
+		return (int) getX() + "," + (int) getY() + " -> " + Arrays.toString(neighbors.stream().map(n -> n.x + "," + n.y).toArray());
 	}
 
 	@Override
 	public Iterator<Node> iterator() {
-		return neighbors.values().iterator();
+		return neighbors.iterator();
 	}
 
 }
