@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Set;
 
 import knmi.msolve.model.maze.Maze;
+import knmi.msolve.model.maze.Node;
 
-public class FileMazeParser implements IMazeParser {
+public class FileMazeParser extends MazeParser {
 
 	private final Path filePath;
 	
@@ -30,7 +32,9 @@ public class FileMazeParser implements IMazeParser {
                 .toArray(Boolean[]::new);
 			}).toArray(Boolean[][]::new);
 			
-			return new Maze(data);
+			Set<Node> nodes = createGraph(data);
+			
+			return new Maze(getWidth(), getHeight(), getEntrance(), getExit(), nodes);
 			
 		} catch (IOException e) {
 			e.printStackTrace();

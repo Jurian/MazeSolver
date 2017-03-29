@@ -57,5 +57,15 @@ public class Node extends Point implements Iterable<Node> {
 	public Iterator<Node> iterator() {
 		return neighbors.iterator();
 	}
+	
+	public static void connect(Node n1, Node n2){
+		n1.addNeighbor(n2);
+		n2.addNeighbor(n1);
+	}
+	
+	public static void disconnect(Node n1, Node n2){
+		n1.removeNeighbor(n2);
+		n2.removeNeighbor(n1);
+	}
 
 }

@@ -1,10 +1,12 @@
 package knmi.msolve.model.parse;
 
 import java.util.Arrays;
+import java.util.Set;
 
 import knmi.msolve.model.maze.Maze;
+import knmi.msolve.model.maze.Node;
 
-public class StringMazeParser implements IMazeParser {
+public class StringMazeParser extends MazeParser {
 
 	private final String[] rawData;
 	
@@ -22,7 +24,10 @@ public class StringMazeParser implements IMazeParser {
 			.map(c -> c == wallChar ? true : false)
             .toArray(Boolean[]::new);
 		}).toArray(Boolean[][]::new);
-		return new Maze(data);
+		
+		Set<Node> nodes = createGraph(data);
+		
+		return new Maze(getWidth(), getHeight(), getEntrance(), getExit(), nodes);
 	}
 
 }

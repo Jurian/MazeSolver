@@ -5,8 +5,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 
-import knmi.msolve.model.generate.DepthFirstMazeGenerator;
+import knmi.msolve.model.generate.BackTrackingMazeGenerator;
 import knmi.msolve.model.generate.IMazeGenerator;
+import knmi.msolve.model.generate.KruskalMazeGenerator;
+import knmi.msolve.model.generate.PrimMazeGenerator;
 import knmi.msolve.model.maze.Maze;
 import knmi.msolve.model.maze.Path;
 import knmi.msolve.model.parse.IMazeParser;
@@ -20,8 +22,17 @@ public class Main {
 	public static void main(String[] args) {
 
 		
-		IMazeGenerator gen = new DepthFirstMazeGenerator(9, 9);
-		gen.generate();
+		//IMazeGenerator gen = new KruskalMazeGenerator(100,100);
+		//Maze maze = gen.generate();
+		
+		//IMazeSolver solver = new AStarMazeSolver(maze);
+		//Path path = solver.solve();
+		
+		//ViewPort vp = new ViewPort();
+		//vp.setVisible(true);
+		//vp.setMaze(maze);
+		//vp.setPath(path);
+		
 		
 		//Create a file chooser
 		final JFileChooser fc = new JFileChooser();
@@ -40,7 +51,6 @@ public class Main {
 		IMazeSolver solver = new AStarMazeSolver(maze);
 		Path path = solver.solve();
 		
-		System.out.println(path.length());
 		//path.forEach(node -> System.out.println("[x="+node.x + ",y=" + node.y+"]"));
 		ViewPort vp = new ViewPort();
 		vp.setVisible(true);

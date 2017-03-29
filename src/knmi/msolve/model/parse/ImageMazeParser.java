@@ -1,9 +1,12 @@
 package knmi.msolve.model.parse;
 
 import java.awt.image.BufferedImage;
-import knmi.msolve.model.maze.Maze;
+import java.util.Set;
 
-public class ImageMazeParser implements IMazeParser {
+import knmi.msolve.model.maze.Maze;
+import knmi.msolve.model.maze.Node;
+
+public class ImageMazeParser extends MazeParser {
 
 	private final BufferedImage img;
 
@@ -99,7 +102,9 @@ public class ImageMazeParser implements IMazeParser {
 			}
 		}
 		
-		return new Maze(data);
+		Set<Node> nodes = createGraph(data);
+		
+		return new Maze(getWidth(), getHeight(), getEntrance(), getExit(), nodes);
 	}
 	
 	private int[][] getPixelData() {

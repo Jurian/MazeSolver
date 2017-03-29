@@ -1,9 +1,11 @@
 package knmi.msolve.view;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import javax.swing.JPanel;
 
 import knmi.msolve.model.maze.Maze;
@@ -39,32 +41,41 @@ public class MazeView extends JPanel {
 			int resoHeight = viewHeight / maze.getHeight();
 			int resoWidth = viewWidth / maze.getWidth();
 			
-			Boolean[][] structure = maze.getRawStructure();
-			
+
 			g.setColor(Color.BLACK);
-			g.clearRect(0, 0, viewWidth, viewHeight);
+			g.fillRect(0, 0, viewWidth, viewHeight);
 			
-			for(int y = 0; y < maze.getHeight(); y++){
-				for(int x = 0; x < maze.getWidth();  x++){
-					g.setColor(structure[y][x] ? Color.BLACK : Color.WHITE );
-					g.fillRect(x * resoWidth, y * resoHeight, resoWidth, resoHeight);
+			Graphics2D g2 = (Graphics2D) g;
+		    RenderingHints rh = new RenderingHints(
+		             RenderingHints.KEY_TEXT_ANTIALIASING,
+		             RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		    g2.setRenderingHints(rh);
+		    
+			g2.setColor(Color.WHITE);
+			g2.setStroke(new BasicStroke(Math.max(resoHeight, resoWidth)/2));
+			
+			for (Node n : maze.getNodes()) {
+				for(Node adj : n) {
+					g2.drawLine(
+						n.x * resoWidth + resoWidth/2, n.y * resoHeight + resoHeight/2, 
+						adj.x * resoWidth + resoWidth/2, adj.y * resoHeight + resoHeight/2);
 				}
 			}
 			
+			
+			g2.setColor(Color.RED);
 			if(path != null) {
-				g.setColor(Color.RED);
 				int i = 0;
 				for(Node n : path) {
-					g.fillOval(n.x * resoWidth, n.y * resoHeight, resoWidth, resoHeight);
 					
+					g2.setColor(Color.RED);
 					if(i > 0) {
 						Node prev = path.getNodes().get(i-1);
-						g.drawLine(	n.x * resoWidth + resoWidth/2,
+						g2.drawLine(n.x * resoWidth + resoWidth/2,
 									n.y * resoHeight + resoHeight/2, 
 									prev.x * resoWidth + resoWidth/2,
 									prev.y * resoHeight + resoHeight/2);
 					}
-					
 					i++;
 				}
 			}
