@@ -7,6 +7,9 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+
+import javafx.geometry.Dimension2D;
+
 import javax.swing.JPanel;
 
 import knmi.msolve.model.maze.Maze;
@@ -15,7 +18,7 @@ import knmi.msolve.model.maze.Path;
 
 public class MazeView extends JPanel {
 
-	public static boolean DEBUG = true;
+	public static boolean DEBUG = false;
 	private static final long serialVersionUID = 1L;
 
 	private Maze maze;
@@ -23,7 +26,16 @@ public class MazeView extends JPanel {
 	
 	public void setMaze(Maze maze) {
 		this.maze = maze;
-		this.setPreferredSize(new Dimension(maze.getWidth() * 10, maze.getHeight() * 10));
+		
+		int max = Math.max(maze.getWidth(), maze.getHeight());
+		int min = Math.min(maze.getWidth(), maze.getHeight());
+
+		if(maze.getWidth() >= maze.getHeight()) {
+			this.setPreferredSize(new Dimension( 1024 , (int) (min/(double)max * 1024)  ));
+		} else {
+			this.setPreferredSize(new Dimension( (int) (min/(double)max * 1024) , 1024  ));
+		}
+		
 		if(path != null) path = null;
 	}
 	

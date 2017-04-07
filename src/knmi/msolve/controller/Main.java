@@ -23,7 +23,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		/*
+		
 		IMazeGenerator gen = new BackTrackingMazeGenerator(200,100);
 		Maze maze = gen.generate();
 
@@ -39,7 +39,7 @@ public class Main {
 		vp.setMaze(maze);
 		vp.setPath(path);
 		
-		
+		/*
 		//Create a file chooser
 		final JFileChooser fc = new JFileChooser();
 		IMazeParser parser = null;
@@ -52,8 +52,8 @@ public class Main {
 	        	
 	        }
 	    }
-		*/
-		IMazeParser parser = new StaticMazeParser();
+		
+		//IMazeParser parser = new StaticMazeParser();
 		Maze maze = parser.parse();
 		IMazeSolver solver = new AStarMazeSolver(maze);
 		Path path = solver.solve();
@@ -63,7 +63,7 @@ public class Main {
 		vp.setVisible(true);
 		vp.setMaze(maze);
 		vp.setPath(path);
-		
+		*/
 	}
 
 }
