@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Set;
 
-import knmi.msolve.model.maze.Maze;
-import knmi.msolve.model.maze.Node;
 
+/**
+ * This class can parse a maze from a text file. One character (top left) is assumed to represent a wall, any others are treated as pathways.
+ * @author baasj
+ *
+ */
 public class FileMazeParser extends MazeParser {
 
 	private final Path filePath;
@@ -22,19 +24,19 @@ public class FileMazeParser extends MazeParser {
 	}
 	
 	@Override
-	public Maze parse() {
+	public Boolean[][] parseMaze() {
 		
 		try {
+			// Find character used for walls
+			int wallChar = Files.lines(filePath).findFirst().get().codePointAt(0);
 			Boolean[][] data = Files.lines(filePath).map(line -> {
 				return line.chars()
 				.boxed()
-				.map(c -> c == 1 ? true : false)
+				.map(c -> c == wallChar ? true : false)
                 .toArray(Boolean[]::new);
 			}).toArray(Boolean[][]::new);
 			
-			Set<Node> nodes = createGraph(data);
-			
-			return new Maze(getWidth(), getHeight(), getEntrance(), getExit(), nodes);
+			return data;
 			
 		} catch (IOException e) {
 			e.printStackTrace();

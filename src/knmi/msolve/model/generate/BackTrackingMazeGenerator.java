@@ -8,10 +8,25 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
-import knmi.msolve.model.maze.Maze;
 import knmi.msolve.model.maze.Node;
 
-
+/**<p>
+ * This algorithm is a randomized version of the depth-first search algorithm
+ * using backtracking.
+ * </p>
+ * <p>
+ * Frequently implemented with a stack, this approach is one of the simplest ways to generate a maze using a computer. 
+ * Consider the space for a maze being a large grid of cells (like a large chess board), each cell starting with four walls. 
+ * Starting from a random cell, the computer then selects a random neighboring cell that has not yet been visited. 
+ * The computer removes the wall between the two cells and marks the new cell as visited, and adds it to the stack to facilitate backtracking. 
+ * The computer continues this process, with a cell that has no unvisited neighbors being considered a dead-end. When at a dead-end it backtracks 
+ * through the path until it reaches a cell with an unvisited neighbor, continuing the path generation by visiting this new, 
+ * unvisited cell (creating a new junction). This process continues until every cell has been visited, causing the computer to backtrack all 
+ * the way back to the beginning cell. We can be sure every cell is visited.
+ * </p>
+ * @author baasj
+ *
+ */
 public class BackTrackingMazeGenerator extends MazeGenerator {
 	
 	private Set<Node> visited = new HashSet<>();
@@ -21,13 +36,13 @@ public class BackTrackingMazeGenerator extends MazeGenerator {
 	}
 
 	@Override
-	public Maze generate() {
+	public void generateMaze() {
 
-		
 		Queue<Node> stack = Collections.asLifoQueue(new ArrayDeque<>());
 		Map<Node, Node> path = new HashMap<>();
 		
-		stack.add(getStart());
+		stack.add(nodesArr[R.nextInt(height)][R.nextInt(width)]);
+		
 		while(!stack.isEmpty()) {
 			Node current = stack.peek();
 			visited.add(current);
@@ -65,10 +80,6 @@ public class BackTrackingMazeGenerator extends MazeGenerator {
 				Node.connect(node, pathTo);
 			}
 		}
-		
-		removeRedundantNodes();
-		
-		return new Maze(width, height, getStart(), getEnd(), getNodes());
 	}
 	
 	private boolean nodeHasUntriedNeighbors(Node n) {

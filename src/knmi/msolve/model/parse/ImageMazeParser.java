@@ -1,11 +1,12 @@
 package knmi.msolve.model.parse;
 
 import java.awt.image.BufferedImage;
-import java.util.Set;
 
-import knmi.msolve.model.maze.Maze;
-import knmi.msolve.model.maze.Node;
-
+/**
+ * Parses mazes from images. Both thin walls and walls as large as pathways are supported.
+ * @author baasj
+ *
+ */
 public class ImageMazeParser extends MazeParser {
 
 	private final BufferedImage img;
@@ -15,7 +16,7 @@ public class ImageMazeParser extends MazeParser {
 	}
 
 	@Override
-	public Maze parse() {
+	public Boolean[][] parseMaze() {
 		
 		int[][] pixels = getPixelData();
 
@@ -102,9 +103,7 @@ public class ImageMazeParser extends MazeParser {
 			}
 		}
 		
-		Set<Node> nodes = createGraph(data);
-		
-		return new Maze(getWidth(), getHeight(), getEntrance(), getExit(), nodes);
+		return data;
 	}
 	
 	private int[][] getPixelData() {

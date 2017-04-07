@@ -9,10 +9,12 @@ import knmi.msolve.model.generate.BackTrackingMazeGenerator;
 import knmi.msolve.model.generate.IMazeGenerator;
 import knmi.msolve.model.generate.KruskalMazeGenerator;
 import knmi.msolve.model.generate.PrimMazeGenerator;
+import knmi.msolve.model.generate.RecursiveDivisionMazeGenerator;
 import knmi.msolve.model.maze.Maze;
 import knmi.msolve.model.maze.Path;
 import knmi.msolve.model.parse.IMazeParser;
 import knmi.msolve.model.parse.ImageMazeParser;
+import knmi.msolve.model.parse.StaticMazeParser;
 import knmi.msolve.model.solve.AStarMazeSolver;
 import knmi.msolve.model.solve.IMazeSolver;
 import knmi.msolve.view.ViewPort;
@@ -21,17 +23,21 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		/*
+		IMazeGenerator gen = new BackTrackingMazeGenerator(200,100);
+		Maze maze = gen.generate();
+
+		IMazeSolver solver = new AStarMazeSolver(maze);
+		Path path = solver.solve();
 		
-		//IMazeGenerator gen = new KruskalMazeGenerator(100,100);
-		//Maze maze = gen.generate();
+		if(path == null) {
+			System.out.println("This maze has no solution!");
+		}
 		
-		//IMazeSolver solver = new AStarMazeSolver(maze);
-		//Path path = solver.solve();
-		
-		//ViewPort vp = new ViewPort();
-		//vp.setVisible(true);
-		//vp.setMaze(maze);
-		//vp.setPath(path);
+		ViewPort vp = new ViewPort();
+		vp.setVisible(true);
+		vp.setMaze(maze);
+		vp.setPath(path);
 		
 		
 		//Create a file chooser
@@ -46,7 +52,8 @@ public class Main {
 	        	
 	        }
 	    }
-		//IMazeParser parser = new StaticMazeParser();
+		*/
+		IMazeParser parser = new StaticMazeParser();
 		Maze maze = parser.parse();
 		IMazeSolver solver = new AStarMazeSolver(maze);
 		Path path = solver.solve();

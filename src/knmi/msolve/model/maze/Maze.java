@@ -2,8 +2,12 @@ package knmi.msolve.model.maze;
 
 import java.util.Set;
 
+/**
+ * Internal representation of a maze. The maze is stored as a graph with the nodes stored in a set.
+ * @author baasj
+ *
+ */
 public class Maze {
-
 	private final Node entrance, exit;
 	private final int width, height;
 	private final Set<Node> nodes;

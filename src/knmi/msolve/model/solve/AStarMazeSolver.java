@@ -11,6 +11,11 @@ import knmi.msolve.model.maze.Maze;
 import knmi.msolve.model.maze.Node;
 import knmi.msolve.model.maze.Path;
 
+/**
+ * Solves a maze using the A* shortest path algorithm.
+ * @author baasj
+ *
+ */
 public class AStarMazeSolver extends MazeSolver {
 	
 	 // The set of nodes already evaluated.

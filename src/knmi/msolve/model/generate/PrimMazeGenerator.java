@@ -7,9 +7,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import knmi.msolve.model.maze.Maze;
 import knmi.msolve.model.maze.Node;
 
+/**
+ * <p> This algorithm is a randomized version of Prim's algorithm. </p>
+ * 
+ * <p>
+ * In computer science, Prim's algorithm is a greedy algorithm that finds a minimum spanning tree for a weighted undirected graph. 
+ * This means it finds a subset of the edges that forms a tree that includes every vertex, where the total weight of all the edges 
+ * in the tree is minimized. The algorithm operates by building this tree one vertex at a time, from an arbitrary starting vertex, 
+ * at each step adding the cheapest possible connection from the tree to another vertex.
+ * </p>
+ * @author baasj
+ *
+ */
 public class PrimMazeGenerator extends MazeGenerator {
 	
 	public PrimMazeGenerator(int width, int height) {
@@ -17,7 +28,7 @@ public class PrimMazeGenerator extends MazeGenerator {
 	}
 
 	@Override
-	public Maze generate() {
+	protected void generateMaze() {
 	
 		Map<Node, List<Wall>> wallMap = new HashMap<>();
 		Set<Node> visited = new HashSet<>();
@@ -66,11 +77,6 @@ public class PrimMazeGenerator extends MazeGenerator {
 			// Remove the wall from the list
 			walls.remove(w);
 		}
-	
-		
-		removeRedundantNodes();
-		
-		return new Maze(width, height, getStart(), getEnd(), getNodes());
 	}
 	
 	class Wall {

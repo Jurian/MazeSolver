@@ -3,6 +3,7 @@ package knmi.msolve.view;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -14,6 +15,7 @@ import knmi.msolve.model.maze.Path;
 
 public class MazeView extends JPanel {
 
+	public static boolean DEBUG = true;
 	private static final long serialVersionUID = 1L;
 
 	private Maze maze;
@@ -21,7 +23,6 @@ public class MazeView extends JPanel {
 	
 	public void setMaze(Maze maze) {
 		this.maze = maze;
-		//this.setSize(maze.getWidth() * 10, maze.getHeight() * 10);
 		this.setPreferredSize(new Dimension(maze.getWidth() * 10, maze.getHeight() * 10));
 		if(path != null) path = null;
 	}
@@ -38,10 +39,9 @@ public class MazeView extends JPanel {
 			int viewHeight = this.getHeight();
 			int viewWidth = this.getWidth();
 			
-			int resoHeight = viewHeight / maze.getHeight();
-			int resoWidth = viewWidth / maze.getWidth();
+			int resoHeight = viewHeight / (maze.getHeight()+2);
+			int resoWidth = viewWidth / (maze.getWidth()+2);
 			
-
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, viewWidth, viewHeight);
 			
@@ -51,14 +51,14 @@ public class MazeView extends JPanel {
 		             RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		    g2.setRenderingHints(rh);
 		    
-			g2.setColor(Color.WHITE);
+
 			g2.setStroke(new BasicStroke(Math.max(resoHeight, resoWidth)/2));
-			
+			g2.setColor(Color.WHITE);
 			for (Node n : maze.getNodes()) {
 				for(Node adj : n) {
 					g2.drawLine(
-						n.x * resoWidth + resoWidth/2, n.y * resoHeight + resoHeight/2, 
-						adj.x * resoWidth + resoWidth/2, adj.y * resoHeight + resoHeight/2);
+						resoWidth + n.x * resoWidth + resoWidth/2, resoHeight + n.y * resoHeight + resoHeight/2, 
+						resoWidth + adj.x * resoWidth + resoWidth/2, resoHeight + adj.y * resoHeight + resoHeight/2);
 				}
 			}
 			
@@ -66,17 +66,29 @@ public class MazeView extends JPanel {
 			g2.setColor(Color.RED);
 			if(path != null) {
 				int i = 0;
+				
 				for(Node n : path) {
-					
-					g2.setColor(Color.RED);
+					g2.setColor(getPathColor(i / (float) path.length()));
 					if(i > 0) {
+						
 						Node prev = path.getNodes().get(i-1);
-						g2.drawLine(n.x * resoWidth + resoWidth/2,
-									n.y * resoHeight + resoHeight/2, 
-									prev.x * resoWidth + resoWidth/2,
-									prev.y * resoHeight + resoHeight/2);
+						g2.drawLine(resoWidth + n.x * resoWidth + resoWidth/2,
+									resoHeight + n.y * resoHeight + resoHeight/2, 
+									resoWidth + prev.x * resoWidth + resoWidth/2,
+									resoHeight + prev.y * resoHeight + resoHeight/2);
 					}
 					i++;
+				}
+			}
+			
+			if(DEBUG) {
+				g2.setFont(new Font("TimesRoman", Font.PLAIN, 8)); 
+				g2.setColor(Color.BLUE);
+				for (Node n : maze.getNodes()) {
+					g2.drawString(
+							n.x + ", " + n.y, 
+							resoWidth + n.x * resoWidth + resoWidth/2, 
+							resoHeight + n.y * resoHeight + resoHeight/2);
 				}
 			}
 			
@@ -84,4 +96,7 @@ public class MazeView extends JPanel {
 
 	}
 
+	private static Color getPathColor(float value){
+		return Color.getHSBColor(value/3f, 1f, 1f);
+	}
 }

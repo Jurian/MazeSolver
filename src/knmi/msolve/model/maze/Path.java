@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * A solution to a maze is represented as a list of nodes to traverse.
+ * @author baasj
+ *
+ */
 public class Path implements Iterable<Node> {
 
 	private final List<Node> nodes = new ArrayList<>();

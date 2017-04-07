@@ -9,9 +9,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import knmi.msolve.model.maze.Maze;
 import knmi.msolve.model.maze.Node;
 
+/**
+ * <p> This algorithm is a randomized version of Kruskal's algorithm. </p>
+ * 
+ * <p>
+ * Kruskal's algorithm is a minimum-spanning-tree algorithm which finds an edge of the least possible weight that connects any two trees in the forest. 
+ * It is a greedy algorithm in graph theory as it finds a minimum spanning tree for a connected weighted graph adding increasing cost arcs at each step.
+ * This means it finds a subset of the edges that forms a tree that includes every vertex, where the total weight of all the edges in the tree is minimized. 
+ * If the graph is not connected, then it finds a minimum spanning forest (a minimum spanning tree for each connected component).
+ * </p>
+ * @author baasj
+ *
+ */
 public class KruskalMazeGenerator extends MazeGenerator {
 
 	public KruskalMazeGenerator(int width, int height) {
@@ -19,7 +30,7 @@ public class KruskalMazeGenerator extends MazeGenerator {
 	}
 
 	@Override
-	public Maze generate() {
+	protected void generateMaze() {
 		List<Wall> walls = new ArrayList<>();
 		Map<Node, LinkedList<Node>> nodeMap = new HashMap<>();
 		Set<Node> visited = new HashSet<>();
@@ -73,10 +84,6 @@ public class KruskalMazeGenerator extends MazeGenerator {
 			}
 			
 		}
-		
-		removeRedundantNodes();
-		
-		return new Maze(width, height, getStart(), getEnd(), getNodes());
 	}
 	
 	class Wall {

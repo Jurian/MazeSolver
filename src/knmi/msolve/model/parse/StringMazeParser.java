@@ -1,11 +1,12 @@
 package knmi.msolve.model.parse;
 
 import java.util.Arrays;
-import java.util.Set;
 
-import knmi.msolve.model.maze.Maze;
-import knmi.msolve.model.maze.Node;
-
+/**
+ * This class can parse a maze from a String array. One character (top left) is assumed to represent a wall, any others are treated as pathways.
+ * @author baasj
+ *
+ */
 public class StringMazeParser extends MazeParser {
 
 	private final String[] rawData;
@@ -15,7 +16,7 @@ public class StringMazeParser extends MazeParser {
 	}
 	
 	@Override
-	public Maze parse() {
+	public Boolean[][] parseMaze() {
 		// Find character used for walls
 		int wallChar = rawData[0].codePointAt(0);
 		Boolean[][] data = Arrays.stream(rawData).map(line -> {
@@ -25,9 +26,7 @@ public class StringMazeParser extends MazeParser {
             .toArray(Boolean[]::new);
 		}).toArray(Boolean[][]::new);
 		
-		Set<Node> nodes = createGraph(data);
-		
-		return new Maze(getWidth(), getHeight(), getEntrance(), getExit(), nodes);
+		return data;
 	}
 
 }
