@@ -19,7 +19,7 @@ public class Node extends Point implements Iterable<Node> {
 	
 	private static final long serialVersionUID = 1L;
 
-	private List<Node> neighbors = new ArrayList<>(4);
+	private final List<Node> neighbors = new ArrayList<>(4);
 
 	private final String key;
 	

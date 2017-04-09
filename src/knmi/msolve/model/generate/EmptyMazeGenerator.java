@@ -8,8 +8,8 @@ package knmi.msolve.model.generate;
  */
 public class EmptyMazeGenerator extends MazeGenerator {
 
-	public EmptyMazeGenerator(int width, int height) {
-		super(width, height);
+	public EmptyMazeGenerator(int width, int height, boolean polar) {
+		super(width, height, polar);
 	}
 
 	@Override

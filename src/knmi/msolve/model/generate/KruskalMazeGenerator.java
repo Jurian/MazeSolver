@@ -25,8 +25,8 @@ import knmi.msolve.model.maze.Node;
  */
 public class KruskalMazeGenerator extends MazeGenerator {
 
-	public KruskalMazeGenerator(int width, int height) {
-		super(width, height);
+	public KruskalMazeGenerator(int width, int height, boolean polar) {
+		super(width, height, polar);
 	}
 
 	@Override

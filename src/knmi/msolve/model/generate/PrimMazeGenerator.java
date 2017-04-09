@@ -23,8 +23,8 @@ import knmi.msolve.model.maze.Node;
  */
 public class PrimMazeGenerator extends MazeGenerator {
 	
-	public PrimMazeGenerator(int width, int height) {
-		super(width, height);
+	public PrimMazeGenerator(int width, int height, boolean polar) {
+		super(width, height, polar);
 	}
 
 	@Override

@@ -14,8 +14,8 @@ import knmi.msolve.model.maze.Node;
  */
 public class RecursiveDivisionMazeGenerator extends MazeGenerator {
 
-	public RecursiveDivisionMazeGenerator(int width, int height) {
-		super(width, height);
+	public RecursiveDivisionMazeGenerator(int width, int height, boolean polar) {
+		super(width, height, polar);
 	}
 
 	@Override

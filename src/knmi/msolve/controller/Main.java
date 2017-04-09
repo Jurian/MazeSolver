@@ -5,26 +5,26 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 
-import knmi.msolve.model.generate.BackTrackingMazeGenerator;
-import knmi.msolve.model.generate.IMazeGenerator;
-import knmi.msolve.model.generate.KruskalMazeGenerator;
-import knmi.msolve.model.generate.PrimMazeGenerator;
-import knmi.msolve.model.generate.RecursiveDivisionMazeGenerator;
-import knmi.msolve.model.maze.Maze;
-import knmi.msolve.model.maze.Path;
-import knmi.msolve.model.parse.IMazeParser;
-import knmi.msolve.model.parse.ImageMazeParser;
-import knmi.msolve.model.parse.StaticMazeParser;
-import knmi.msolve.model.solve.AStarMazeSolver;
-import knmi.msolve.model.solve.IMazeSolver;
+import knmi.msolve.model.generate.*;
+import knmi.msolve.model.maze.*;
+import knmi.msolve.model.parse.*;
+import knmi.msolve.model.solve.*;
 import knmi.msolve.view.ViewPort;
 
 public class Main {
 
 	public static void main(String[] args) {
 
+		IMazeGenerator gen = new EmptyMazeGenerator(15, 15, true);
+		Maze maze = gen.generate();
+		ViewPort vp = new ViewPort();
+		vp.setVisible(true);
+		vp.setMaze(maze);
 		
-		IMazeGenerator gen = new BackTrackingMazeGenerator(200,100);
+		System.out.println(gen.toString());
+		
+		/*
+		IMazeGenerator gen = new KruskalMazeGenerator(200,100);
 		Maze maze = gen.generate();
 
 		IMazeSolver solver = new AStarMazeSolver(maze);
@@ -38,7 +38,7 @@ public class Main {
 		vp.setVisible(true);
 		vp.setMaze(maze);
 		vp.setPath(path);
-		
+		*/
 		/*
 		//Create a file chooser
 		final JFileChooser fc = new JFileChooser();

@@ -11,13 +11,19 @@ public class Maze {
 	private final Node entrance, exit;
 	private final int width, height;
 	private final Set<Node> nodes;
+	private final boolean polar;
 	
 	public Maze(int width, int height, Node entrance, Node exit, Set<Node> nodes){
+		this(width, height, entrance, exit, nodes, false);
+	}
+	
+	public Maze(int width, int height, Node entrance, Node exit, Set<Node> nodes, boolean polar){
 		this.entrance = entrance;
 		this.exit = exit;
 		this.width = width;
 		this.height = height;
 		this.nodes = nodes;
+		this.polar = polar;
 	}
 	
 	public Node getEntrance() {
@@ -38,5 +44,9 @@ public class Maze {
 
 	public Set<Node> getNodes() {
 		return nodes;
+	}
+
+	public boolean isPolar() {
+		return polar;
 	}
 }

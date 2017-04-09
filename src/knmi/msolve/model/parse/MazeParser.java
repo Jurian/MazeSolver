@@ -101,8 +101,8 @@ public abstract class MazeParser implements IMazeParser {
 			}
 		}
 		
-		width = width - nrOfRedundantCols;
-		height = height - nrOfRedundantRows;
+		width -= nrOfRedundantCols;
+		height -= nrOfRedundantRows;
 
 		return nodes;
 	}

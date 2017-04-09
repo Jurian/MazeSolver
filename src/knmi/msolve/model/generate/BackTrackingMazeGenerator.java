@@ -31,8 +31,8 @@ public class BackTrackingMazeGenerator extends MazeGenerator {
 	
 	private Set<Node> visited = new HashSet<>();
 	
-	public BackTrackingMazeGenerator(int width, int height) {
-		super(width, height);
+	public BackTrackingMazeGenerator(int width, int height, boolean polar) {
+		super(width, height, polar);
 	}
 
 	@Override
