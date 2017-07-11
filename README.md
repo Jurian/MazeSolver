@@ -18,3 +18,7 @@ Mazes can be generated using a few different algorithms, yielding different diff
 ## Solve
 
 All imported and generated mazes can be solved or shown as unsolvable. Currently the only available option for solving is the A-star pathfinding algorithm.
+
+## Related links
+
+For more information on maze generators look here: https://en.wikipedia.org/wiki/Maze_generation_algorithm
