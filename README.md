@@ -4,7 +4,7 @@ Just a pet project inspired by a "ComputerPhile" episode.
 
 ## Import
 
-The software can import clean images of mazes
+The software can import clean images of mazes. Examples of importable images are in the ~/res directory.
 
 ## Generate
 
